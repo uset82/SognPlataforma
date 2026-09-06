@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Secrets — OpenRouter keys live here. Never commit (rules.md §4.5).
+.env
+.env.*
+!.env.example
+
+# Separate repositories with their own GitHub remotes. Committing these from
+# here would produce broken gitlinks and duplicate work that is already pushed:
+#   app/           -> github.com/uset82/SognAPP
+#   app/prototipo/ -> github.com/uset82/SognEmergencyPrototype
+app/
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

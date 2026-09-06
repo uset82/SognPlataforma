@@ -1,0 +1,313 @@
+/* ============================================================================
+   PRIMITIVES — the atoms that enforce the five laws.
+   LAW 4 is structural here: .panel must never nest inside .panel.
+   ============================================================================ */
+
+/* ---------- Eyebrow: the single section-labelling voice ------------------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t-11);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fjord-on);
+  white-space: nowrap;
+}
+.eyebrowMuted { color: var(--text-faint); }
+
+/* ---------- Panel: elevation 1. Hairline ring, NO shadow. ---------------- */
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  background: var(--ground-1);
+  border-radius: var(--r-md);
+  box-shadow: var(--e1);
+}
+.panelPad { padding: var(--s4); }
+
+/* Elevation 2: glass. LAW 3 — only ever rendered above the map. */
+.panelFloat {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--e2);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+/* Specular top hairline — an overlay, never a border (avoids a double border). */
+.panelFloat::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 40%;
+  background: var(--glass-spec);
+  pointer-events: none;
+  border-radius: var(--r-md) var(--r-md) 0 0;
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--line-faint);
+  flex: none;
+}
+.panelHeadTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  min-width: 0;
+}
+.panelTitle {
+  font-family: var(--font-ui);
+  font-size: var(--t-13);
+  font-weight: 600;
+  color: var(--text-hi);
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.panelActions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  flex: none;
+}
+.panelBody { flex: 1; min-height: 0; }
+
+/* ---------- Metric: LAW 5, numerals are the hero ------------------------- */
+.metric { display: flex; flex-direction: column; gap: var(--s1); min-width: 0; }
+.metricLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-family: var(--font-mono);
+  font-size: var(--t-10);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+}
+.metricValueRow { display: flex; align-items: baseline; gap: var(--s2); }
+.metricValue {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: var(--text-hi);
+}
+.mSm { font-size: var(--t-20); }
+.mMd { font-size: var(--t-26); }
+.mLg { font-size: var(--t-34); }
+.mXl { font-size: var(--t-48); }
+.metricUnit {
+  font-family: var(--font-mono);
+  font-size: var(--t-11);
+  color: var(--text-lo);
+  letter-spacing: 0.04em;
+}
+.metricSub { font-size: var(--t-11); color: var(--text-lo); }
+
+.toneCritical .metricValue { color: var(--critical-on); }
+.toneWarning .metricValue { color: var(--warning-on); }
+.toneSafe .metricValue { color: var(--safe-on); }
+.toneFjord .metricValue { color: var(--fjord-on); }
+
+/* Progress meter — 3px, hairline track, no glow. */
+.meter {
+  height: 3px;
+  border-radius: var(--r-pill);
+  background: var(--line);
+  overflow: hidden;
+}
+.meterFill {
+  height: 100%;
+  border-radius: var(--r-pill);
+  background: var(--fjord-on);
+  transition: width var(--dur-3) var(--ease);
+}
+.toneCritical .meterFill { background: var(--critical-on); }
+.toneWarning .meterFill { background: var(--warning-on); }
+.toneSafe .meterFill { background: var(--safe-on); }
+
+/* ---------- Pill: compact state chip ------------------------------------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 3px var(--s2);
+  border-radius: var(--r-sm);
+  font-family: var(--font-mono);
+  font-size: var(--t-10);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: var(--fjord-wash);
+  color: var(--fjord-on);
+  box-shadow: inset 0 0 0 1px var(--fjord-edge);
+}
+.pillCritical {
+  background: var(--critical-wash);
+  color: var(--critical-on);
+  box-shadow: inset 0 0 0 1px var(--critical-edge);
+}
+.pillWarning {
+  background: var(--warning-wash);
+  color: var(--warning-on);
+  box-shadow: inset 0 0 0 1px var(--warning-edge);
+}
+.pillSafe {
+  background: var(--safe-wash);
+  color: var(--safe-on);
+  box-shadow: inset 0 0 0 1px var(--safe-edge);
+}
+.pillNeutral {
+  background: transparent;
+  color: var(--text-lo);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none; }
+/* The single permitted looping animation in the product. */
+.dotLive { animation: livePulse 2s var(--ease) infinite; }
+
+/* ---------- Button ------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  border-radius: var(--r-sm);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  color: var(--text-hi);
+  background: var(--ground-2);
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition:
+    background var(--dur-1) var(--ease),
+    transform var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+.btn:hover:not(:disabled) { background: var(--ground-3); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:disabled { opacity: 0.42; cursor: not-allowed; }
+
+.btnSm { height: 26px; padding: 0 var(--s3); font-size: var(--t-11); }
+.btnMd { height: 32px; padding: 0 var(--s4); font-size: var(--t-12); }
+.btnLg { height: 42px; padding: 0 var(--s5); font-size: var(--t-14); }
+.btnBlock { width: 100%; justify-content: flex-start; }
+
+.btnCritical { background: var(--critical); color: #fff; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14); }
+.btnCritical:hover:not(:disabled) { background: #c9433a; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22); }
+.btnWarning { background: var(--warning); color: #1b1206; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16); }
+.btnWarning:hover:not(:disabled) { background: #e8850c; }
+.btnSafe { background: var(--safe); color: #eaf6f0; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14); }
+.btnSafe:hover:not(:disabled) { background: #3a6a5b; }
+.btnFjord { background: var(--fjord); color: #f0f5f5; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14); }
+.btnFjord:hover:not(:disabled) { background: #607a7e; }
+.btnGhost { background: transparent; color: var(--text-lo); box-shadow: none; }
+.btnGhost:hover:not(:disabled) { background: var(--ground-2); color: var(--text-hi); box-shadow: none; }
+
+/* Toggled-on state for map layer / filter buttons */
+.btnOn {
+  background: var(--fjord-wash);
+  color: var(--fjord-on);
+  box-shadow: inset 0 0 0 1px var(--fjord-edge);
+}
+.btnOn:hover:not(:disabled) {
+  background: rgba(126, 154, 158, 0.2);
+  box-shadow: inset 0 0 0 1px var(--fjord-edge);
+}
+
+/* ---------- Toggle row (map layer checkboxes) ---------------------------- */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  width: 100%;
+  padding: 3px var(--s1);
+  border-radius: var(--r-sm);
+  font-size: var(--t-11);
+  color: var(--text);
+  text-align: left;
+  transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+.toggle:hover { background: rgba(237, 239, 236, 0.06); color: var(--text-hi); }
+.toggleBox {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  color: var(--ground-0);
+  transition: background var(--dur-1) var(--ease);
+}
+.toggleBoxOn { background: var(--fjord-on); box-shadow: none; }
+.toggleSwatch { width: 12px; height: 3px; border-radius: var(--r-pill); flex: none; }
+.toggleLabel { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ---------- DataTable ---------------------------------------------------- */
+.table { width: 100%; font-size: var(--t-12); }
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--ground-1);
+  font-family: var(--font-mono);
+  font-size: var(--t-10);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  text-align: left;
+  padding: var(--s2) var(--s3);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.table tbody td {
+  padding: var(--s2) var(--s3);
+  border-bottom: 1px solid var(--line-faint);
+  color: var(--text);
+  white-space: nowrap;
+}
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr { transition: background var(--dur-1) var(--ease); }
+.table tbody tr:hover td { background: rgba(237, 239, 236, 0.035); }
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  text-align: right;
+}
+.tableTotal td {
+  font-weight: 600;
+  color: var(--text-hi);
+  border-top: 1px solid var(--line);
+  background: rgba(237, 239, 236, 0.03);
+}
+
+/* ---------- Divider ------------------------------------------------------ */
+.divider { height: 1px; background: var(--line-faint); flex: none; }
+.dividerV { width: 1px; align-self: stretch; background: var(--line-faint); flex: none; }
+
+/* ---------- Empty state -------------------------------------------------- */
+.empty {
+  display: grid;
+  place-items: center;
+  padding: var(--s10) var(--s4);
+  color: var(--text-faint);
+  font-size: var(--t-12);
+  text-align: center;
+}

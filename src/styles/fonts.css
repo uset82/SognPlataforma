@@ -1,0 +1,28 @@
+/* ============================================================================
+   TYPOGRAPHY — three families, three jobs. Inter is deliberately absent.
+   ============================================================================ */
+:root {
+  /* Display: alert headlines, big metrics. Engineered, institutional. */
+  --font-display: 'Archivo', 'Schibsted Grotesk', system-ui, sans-serif;
+  /* UI/body: Norwegian grotesk, excellent æ ø å. */
+  --font-ui: 'Schibsted Grotesk', 'Archivo', system-ui, sans-serif;
+  /* Telemetry: true tabular figures so ticking numbers never jitter. */
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+}
+
+/* LAW 5: numerals are the hero. Every readout is tabular. */
+.tnum {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum' 1, 'zero' 1;
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+/* Display numerals — large metrics keep tabular spacing but gain Archivo's
+   tighter, more confident forms. */
+.dnum {
+  font-family: var(--font-display);
+  font-feature-settings: 'tnum' 1;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}

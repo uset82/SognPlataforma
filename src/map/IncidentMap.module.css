@@ -1,0 +1,199 @@
+/* ============================================================================
+   Map markers. Every label on the map is HTML — there are no symbol layers,
+   which is what makes the mockups' callout chips reproducible exactly.
+   ============================================================================ */
+
+/* ---------- Zone label ---------------------------------------------------- */
+.zoneLabel {
+  font-family: var(--font-mono);
+  font-size: var(--t-10);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px var(--s2);
+  border-radius: var(--r-sm);
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  user-select: none;
+}
+.zoneCritical { color: #ffdedb; background: rgba(184, 58, 50, 0.82); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2); }
+.zoneWarning { color: #2a1a05; background: rgba(240, 168, 58, 0.88); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24); }
+.zoneSafe { color: #e6f7ee; background: rgba(49, 88, 76, 0.86); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2); }
+
+/* ---------- Vessel -------------------------------------------------------- */
+.vessel { display: grid; place-items: center; }
+.vesselGlyph {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(10, 12, 13, 0.86);
+  color: var(--critical-on);
+  box-shadow:
+    0 0 0 1px var(--critical-edge),
+    0 6px 18px -4px rgba(0, 0, 0, 0.8);
+}
+/* Heading is applied to the glyph only, so the callout stays upright. */
+.vesselHeading { transform-origin: 50% 50%; }
+
+.vesselCallout {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 168px;
+  padding: var(--s2) var(--s3);
+  border-radius: var(--r-md);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--e2);
+  pointer-events: none;
+}
+.vesselName { display: block;
+  font-family: var(--font-ui);
+  font-size: var(--t-12);
+  font-weight: 700;
+  color: var(--text-hi);
+  white-space: nowrap;
+}
+.vesselRow {
+  display: flex;
+  gap: var(--s3);
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--t-10);
+  color: var(--text-lo);
+  font-variant-numeric: tabular-nums;
+}
+.vesselEta { display: block;
+  margin-top: var(--s2);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--t-11);
+  font-weight: 600;
+  color: var(--critical-on);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Pin (safe zone, helipad, hospital) --------------------------- */
+.pin { display: flex; align-items: center; gap: var(--s2); user-select: none; }
+.pinDisc {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow:
+    0 0 0 1.5px rgba(255, 255, 255, 0.5),
+    0 4px 12px -2px rgba(0, 0, 0, 0.8);
+}
+.pinSafe { background: #2f6b53; }
+.pinHeli { background: #2a6070; }
+.pinLabel {
+  font-family: var(--font-ui);
+  font-size: var(--t-11);
+  font-weight: 600;
+  color: var(--text-hi);
+  white-space: nowrap;
+  padding: 2px var(--s2);
+  border-radius: var(--r-sm);
+  background: rgba(10, 12, 13, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ---------- Distress marker ---------------------------------------------- */
+.distress {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 1.5px rgba(255, 255, 255, 0.55),
+    0 3px 8px -1px rgba(0, 0, 0, 0.7);
+  transition: transform var(--dur-1) var(--ease);
+}
+.distress:hover { transform: scale(1.35); }
+.distress:focus-visible { outline: 2px solid var(--text-hi); outline-offset: 2px; }
+.dCritical { background: #e5484d; }
+.dUrgent { background: #f0a83a; }
+.dStandard { background: #7e9a9e; }
+.dNonUrgent { background: #6b7a78; }
+.dResolved { background: #4fbf8b; }
+
+/* ---------- Free label (place names) ------------------------------------- */
+.place {
+  font-family: var(--font-ui);
+  font-size: var(--t-13);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ---------- Overlay panels (glass — permitted here only) ----------------- */
+.layerPanel { width: 178px; padding: var(--s3); display: flex; flex-direction: column; gap: 2px; }
+.layerPanelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s2);
+}
+.readout { padding: var(--s3); min-width: 156px; display: flex; flex-direction: column; gap: var(--s2); }
+.readoutRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  font-size: var(--t-11);
+  color: var(--text-lo);
+}
+.readoutVal {
+  font-family: var(--font-mono);
+  color: var(--text-hi);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+.basemapRow { display: flex; gap: 2px; padding: 3px; }
+.provenance {
+  margin-top: var(--s2);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--line);
+  font-size: var(--t-10);
+  color: var(--text-faint);
+  line-height: 1.4;
+}
+
+/* ---------- Glass shell for map overlays --------------------------------
+   LAW 3: this is the only surface in the product allowed to use backdrop
+   blur, because it is the only one that physically floats above the map. */
+.float {
+  position: relative;
+  border-radius: var(--r-md);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--e2);
+  overflow: hidden;
+}
+.float::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 44%;
+  background: var(--glass-spec);
+  pointer-events: none;
+}
+.float > * { position: relative; }

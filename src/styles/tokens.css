@@ -1,0 +1,118 @@
+/* ============================================================================
+   SOGN SAFE — "NORDIC INSTRUMENT" DESIGN TOKENS
+   ----------------------------------------------------------------------------
+   LAW 2: Colour is exclusively semantic. Chrome is graphite. A colour token
+   only exists here if it carries incident meaning. There are no decorative
+   colours in this file, and none may be added.
+
+   The named brand palette in rules.md (Fjord/Pine/Signal/Amber) is authored
+   for the PAPER surface. Those values fail contrast on graphite, so each has
+   an explicit on-dark sibling here. Both are kept: paper values drive the
+   light authoring surface (Public Alert), on-dark values drive the console.
+   ============================================================================ */
+
+:root {
+  /* ---- Ground ramp -------------------------------------------------------
+     Graphite with a faint cool cast: instrument metal, never SaaS navy.
+     Four steps only. If a surface needs a fifth, the layout is wrong.        */
+  --ground-0: #0A0C0D;   /* app ground — flat, never patterned              */
+  --ground-1: #101315;   /* panel                                            */
+  --ground-2: #171B1D;   /* raised / hover                                   */
+  --ground-3: #1F2426;   /* input / pressed / active row                     */
+
+  /* ---- Hairlines ---------------------------------------------------------
+     LAW 4: max ONE border between content and ground.                       */
+  --line:        rgba(233, 238, 238, 0.10);
+  --line-strong: rgba(233, 238, 238, 0.18);
+  --line-faint:  rgba(233, 238, 238, 0.06);
+
+  /* ---- Text on graphite --------------------------------------------------- */
+  --text-hi:    #EDEFEC;                      /* headings, primary numerals   */
+  --text:       rgba(237, 239, 236, 0.78);    /* body                         */
+  --text-lo:    rgba(237, 239, 236, 0.55);    /* secondary / captions         */
+  --text-faint: rgba(237, 239, 236, 0.36);    /* disabled / axis              */
+
+  /* ---- Paper surface (light authoring views: Public Alert) --------------- */
+  --paper:      #F4F3EF;
+  --paper-deep: #ECEAE3;
+  --paper-line: #D8D9D4;
+  --ink:        #171A1A;
+  --ink-lo:     rgba(23, 26, 26, 0.62);
+  --ink-faint:  rgba(23, 26, 26, 0.38);
+
+  /* ---- SEMANTIC STATE ----------------------------------------------------
+     These four are the ONLY chromatic colours in the product.
+     `-on` = readable on graphite. base = rules.md paper value.              */
+
+  /* CRITICAL — impact zone, loss of control, time-to-impact */
+  --critical:      #B83A32;
+  --critical-on:   #E85D54;
+  --critical-wash: rgba(232, 93, 84, 0.13);
+  --critical-edge: rgba(232, 93, 84, 0.42);
+
+  /* WARNING — evacuation perimeter, pending authorisation, degraded */
+  --warning:      #D97706;
+  --warning-on:   #F0A83A;
+  --warning-wash: rgba(240, 168, 58, 0.13);
+  --warning-edge: rgba(240, 168, 58, 0.42);
+
+  /* SAFE — confirmed havens, verified check-ins, clear routes */
+  --safe:      #31584C;
+  --safe-on:   #4FBF8B;
+  --safe-wash: rgba(79, 191, 139, 0.13);
+  --safe-edge: rgba(79, 191, 139, 0.42);
+
+  /* NEUTRAL SIGNAL — chrome accent, telemetry, water, eyebrows.
+     Carries "system" meaning, never excitement. */
+  --fjord:      #53686B;
+  --fjord-on:   #7E9A9E;
+  --fjord-wash: rgba(126, 154, 158, 0.12);
+  --fjord-edge: rgba(126, 154, 158, 0.38);
+
+  /* ---- Space — 4px base -------------------------------------------------- */
+  --s1: 4px;   --s2: 8px;   --s3: 12px;  --s4: 16px;
+  --s5: 20px;  --s6: 24px;  --s8: 32px;  --s10: 40px;
+  --s12: 48px; --s16: 64px;
+
+  /* ---- Radii — tight; instrument panels, not pill-shaped SaaS cards ------ */
+  --r-sm: 3px;
+  --r-md: 5px;
+  --r-lg: 8px;
+  --r-pill: 999px;
+
+  /* ---- Type scale — console density -------------------------------------- */
+  --t-10: 10px;  --t-11: 11px;  --t-12: 12px;  --t-13: 13px;
+  --t-14: 14px;  --t-16: 16px;  --t-20: 20px;  --t-26: 26px;
+  --t-34: 34px;  --t-48: 48px;  --t-64: 64px;
+
+  /* ---- Elevation — LAW 4: exactly three levels --------------------------- */
+  /* 0 = page ground: no ring, no shadow. Declared for documentation only.   */
+  --e0: none;
+  /* 1 = panel: hairline ring, NO shadow. Flat panels never lift.            */
+  --e1: inset 0 0 0 1px var(--line);
+  /* 2 = floating above the map: the only place a shadow is permitted.             */
+  --e2:
+    0 12px 32px -8px rgba(0, 0, 0, 0.72),
+    0 3px 8px -2px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px var(--line-strong);
+
+  /* ---- Glass — LAW 3: permitted ONLY on overlays above the map ----------- */
+  --glass-bg:   rgba(13, 17, 19, 0.72);
+  --glass-blur: blur(20px) saturate(150%);
+  /* Specular top hairline (iOS-26 style), applied as a ::before, never a border */
+  --glass-spec: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0) 60%);
+
+  /* ---- Motion — LAW: transform & opacity only ---------------------------- */
+  --ease:    cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+
+  /* ---- Layout ------------------------------------------------------------ */
+  --rail-w: 224px;
+  --rail-w-collapsed: 56px;
+  --alertbar-h: 52px;
+  --meridian-h: 22px;
+  --scrubber-h: 68px;
+}

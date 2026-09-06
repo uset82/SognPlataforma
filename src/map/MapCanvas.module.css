@@ -1,0 +1,77 @@
+.wrap {
+  /* Establishes a query container so overlays can stand down when the map
+     panel is too short to hold them (laptop heights, stacked layouts). */
+  container-type: size;
+  container-name: mapwrap;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--ground-0);
+  box-shadow: var(--e1);
+}
+.canvas { position: absolute; inset: 0; }
+
+/* Overlay plane. Transparent to the pointer so map drag still works; each
+   floating panel re-enables pointer events for itself. */
+.overlays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  padding: var(--s3);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--s3);
+  z-index: 2;
+}
+.overlays > * { pointer-events: auto; }
+
+.slotTL { grid-column: 1; grid-row: 1; justify-self: start; align-self: start; }
+.slotTR { grid-column: 3; grid-row: 1; justify-self: end; align-self: start; }
+.slotBL { grid-column: 1; grid-row: 3; justify-self: start; align-self: end; }
+.slotBR { grid-column: 3; grid-row: 3; justify-self: end; align-self: end; }
+
+/* Loading / failure states — the map must never be a silent black rectangle. */
+.status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  gap: var(--s2);
+  z-index: 3;
+  background: var(--ground-0);
+  color: var(--text-lo);
+  font-family: var(--font-mono);
+  font-size: var(--t-11);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: var(--s6);
+  transition: opacity var(--dur-3) var(--ease);
+}
+.statusHidden { opacity: 0; pointer-events: none; }
+.statusNote {
+  font-family: var(--font-ui);
+  font-size: var(--t-12);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-faint);
+  max-width: 42ch;
+  line-height: 1.5;
+}
+
+/* Marker containers are sized by their content, not by MapLibre. */
+.marker { will-change: transform; }
+
+/* On a short map panel the secondary readout would overflow its own frame, so
+   it stands down and leaves the layer switcher — the control that matters. */
+@container mapwrap (max-height: 430px) {
+  .slotBL { display: none; }
+}
+@container mapwrap (max-height: 260px) {
+  .overlays { padding: var(--s2); }
+  .slotTL { max-height: 100%; overflow: hidden; }
+}

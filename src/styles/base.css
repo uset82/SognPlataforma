@@ -1,0 +1,122 @@
+@import './tokens.css';
+@import './fonts.css';
+
+/* ============================================================================
+   BASE — flat graphite ground. LAW: no decorative background pattern.
+   The map carries the texture; the chrome stays silent.
+   ============================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground-0);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--t-13);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden; /* the console owns its own scroll regions */
+}
+
+h1, h2, h3, h4, p, figure { margin: 0; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-hi);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+a { color: var(--fjord-on); }
+
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+table { border-collapse: collapse; width: 100%; }
+
+/* ---- Focus: always visible, never a layout shift ------------------------ */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--fjord-on);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* ---- Scrollbars — hairline, part of the instrument ---------------------- */
+* { scrollbar-width: thin; scrollbar-color: rgba(237,239,236,0.16) transparent; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(237, 239, 236, 0.16);
+  border-radius: var(--r-pill);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(237, 239, 236, 0.28); background-clip: content-box; }
+::-webkit-scrollbar-corner { background: transparent; }
+
+::selection { background: var(--fjord-on); color: var(--ground-0); }
+
+/* ---- Utility: scroll region -------------------------------------------- */
+.scroll-y { overflow-y: auto; overflow-x: hidden; min-height: 0; }
+
+/* ---- Motion ------------------------------------------------------------- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* The single permitted looping animation: the live-incident indicator. */
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- MapLibre overrides — our chrome, not theirs ------------------------ */
+.maplibregl-ctrl-attrib {
+  font-family: var(--font-ui);
+  font-size: var(--t-10);
+  background: rgba(10, 12, 13, 0.72) !important;
+  color: var(--text-lo);
+  border-radius: var(--r-sm) 0 0 0;
+}
+.maplibregl-ctrl-attrib a { color: var(--text-lo); text-decoration: none; }
+.maplibregl-ctrl-attrib a:hover { color: var(--text); text-decoration: underline; }
+.maplibregl-ctrl-bottom-left .maplibregl-ctrl-scale {
+  font-family: var(--font-mono);
+  font-size: var(--t-10);
+  background: rgba(10, 12, 13, 0.72);
+  color: var(--text-lo);
+  border-color: var(--line-strong);
+  border-radius: 0 0 var(--r-sm) 0;
+}
+.maplibregl-canvas:focus-visible { outline: 2px solid var(--fjord-on); outline-offset: -2px; }
