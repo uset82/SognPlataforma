@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 import { IncidentMap } from '../../map/IncidentMap';
-import { Button, Eyebrow, Pill } from '../primitives';
+import { Button, Pill } from '../primitives';
 import { useIncident } from '../../state/IncidentContext';
 import { num, timeOnly, dateLong } from '../../lib/format';
 import s from './PublicAlert.module.css';
@@ -448,9 +448,11 @@ export const PublicAlert: React.FC = () => {
         </span>
       </div>
 
-      <Eyebrow muted>
+      {/* A sentence, not a label — Eyebrow is white-space:nowrap by design and
+          forced this module to 708px on a phone. */}
+      <p className={s.footnote}>
         Human authorisation required · every alert is logged and time-stamped · drill data only
-      </Eyebrow>
+      </p>
     </div>
   );
 };

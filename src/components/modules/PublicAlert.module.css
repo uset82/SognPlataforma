@@ -33,6 +33,10 @@
   height: 100%;
   min-height: 0;
   display: grid;
+  /* Without an explicit track a grid column is sized `auto`, i.e. to content —
+     which let the 4-column composer force the whole page to 708px inside a
+     359px phone. minmax(0, 1fr) is what allows children to actually shrink. */
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: var(--s3);
   padding-bottom: var(--s3);
@@ -50,12 +54,13 @@
 .headActions { margin-left: auto; }
 
 .columns {
+  min-width: 0;
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr) minmax(0, 1fr) 260px;
   gap: var(--s3);
   min-height: 0;
 }
-.col { min-height: 0; display: flex; flex-direction: column; gap: var(--s3); overflow-y: auto; }
+.col { min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: var(--s3); overflow-y: auto; }
 
 .step { display: flex; flex-direction: column; gap: var(--s2); }
 .stepLabel {
@@ -321,5 +326,43 @@
 @media (max-width: 1180px) {
   .paper { overflow-y: auto; grid-template-rows: auto auto auto; }
   .columns { grid-template-columns: minmax(0, 1fr); }
+  .col { overflow: visible; min-width: 0; }
+  .previewCard,
+  .actionList,
+  .statRow { min-width: 0; }
+  .select { max-width: 100%; }
+}
+
+@media (max-width: 700px) {
+  .paper {
+    padding: var(--s3);
+    grid-template-rows: auto auto auto;
+    overflow: visible;
+    height: auto;
+  }
+  .head { flex-direction: column; align-items: flex-start; gap: var(--s2); }
+  .headText h2 { font-size: var(--t-20); }
+  .headActions { margin-left: 0; }
+  .columns { grid-template-columns: minmax(0, 1fr); }
   .col { overflow: visible; }
+  .colPhone { display: flex; }
+  .mapBox { height: 260px; }
+  /* Language tabs need to stay tappable rather than shrink to nothing. */
+  .langTab { font-size: 9px; letter-spacing: 0.04em; }
+  .review { flex-wrap: wrap; }
+  .reviewActions { margin-left: 0; width: 100%; flex-wrap: wrap; }
+  .reviewActions > * { flex: 1 1 auto; }
+}
+
+/* Disclaimer line. Deliberately not the Eyebrow primitive: that one is
+   white-space:nowrap for short labels, and a full sentence in it forced this
+   module to 708px wide on a phone. */
+.footnote {
+  font-family: var(--font-mono);
+  font-size: var(--t-10);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  line-height: 1.6;
+  margin: 0;
 }

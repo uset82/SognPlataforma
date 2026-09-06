@@ -42,7 +42,12 @@ const ModuleOutlet: React.FC = () => {
 
 export const AppShell: React.FC = () => {
   const [railCollapsed, setRailCollapsed] = useState(false);
-  const [scrubCollapsed, setScrubCollapsed] = useState(false);
+  /* On a phone the expanded scenario bar wraps to three rows and eats ~140px
+     before any content — so it starts collapsed to its single-line summary and
+     opens on tap. Desktop keeps it open, where the height is affordable. */
+  const [scrubCollapsed, setScrubCollapsed] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 700px)').matches
+  );
   const { activeModule } = useIncident();
 
   return (

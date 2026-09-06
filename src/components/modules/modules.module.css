@@ -381,3 +381,84 @@
   .medKpis { grid-template-columns: repeat(2, 1fr); }
   .riskStrip { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ============================================================================
+   PHONE (<= 700px)
+   Every module collapses to a single scrolling column. The map keeps a fixed
+   share of the viewport so it stays readable instead of being squeezed to a
+   sliver by the panels below it.
+   ============================================================================ */
+@media (max-width: 700px) {
+  .module {
+    /* Height is content-driven now; `main` owns the scroll. */
+    height: auto;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: none !important;
+    grid-template-areas: none !important;
+    gap: var(--s2);
+    padding-bottom: var(--s4);
+  }
+  /* Grid-area placement is meaningless in a single column; clear it so source
+     order decides, which is already the priority order for each module. */
+  .module > * {
+    grid-area: auto !important;
+    grid-column: auto !important;
+    min-width: 0;
+  }
+
+  /* The map is the product — give it a fixed, readable slice of the screen. */
+  .dashMap,
+  .riskMap,
+  .medMap {
+    height: 40vh;
+    min-height: 230px;
+    max-height: 320px;
+  }
+
+  .dashRail,
+  .riskIncident,
+  .riskVessel,
+  .medRail,
+  .orchInsights {
+    overflow: visible;
+    min-height: 0;
+  }
+  .dashLow { grid-template-columns: minmax(0, 1fr); }
+  .medTables { grid-template-columns: minmax(0, 1fr); }
+
+  /* Two KPI columns is the most that stays legible at 390px. */
+  .kpiGrid,
+  .medKpis,
+  .riskStrip { grid-template-columns: repeat(2, 1fr); }
+
+  /* Feeds and rosters get a bounded height so one long list cannot push the
+     rest of the module off the bottom of a phone screen. */
+  .feed,
+  .agentStrip,
+  .scrollPanel {
+    max-height: 340px;
+    overflow-y: auto;
+  }
+  .agentStrip { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); }
+  .agentChipName { font-size: 10px; word-break: break-word; }
+
+  /* Tables keep their columns and scroll sideways inside their own panel,
+     rather than stretching the page. */
+  .scrollPanel { overflow-x: auto; }
+
+  /* The orchestration tree genuinely needs width; let it pan inside its panel
+     instead of forcing the whole document sideways. */
+  .orchTree { overflow: auto; }
+  .tree { min-width: 560px; padding: var(--s4) var(--s3); }
+
+  .specPhoto { height: 120px; }
+  .donutWrap { padding: var(--s3); }
+}
+
+@media (max-width: 380px) {
+  .kpiGrid,
+  .medKpis,
+  .riskStrip { grid-template-columns: repeat(2, 1fr); }
+  .agentStrip { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+}

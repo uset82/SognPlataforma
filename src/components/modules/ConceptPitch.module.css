@@ -145,3 +145,19 @@
   .wrap { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); overflow-y: auto; }
   .side { overflow: visible; }
 }
+
+@media (max-width: 700px) {
+  .wrap {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    overflow-y: auto;
+    gap: var(--s2);
+  }
+  .side { overflow: visible; }
+  /* On a phone the gallery leads; the index follows it. */
+  .stage { order: -1; }
+  .figure { min-height: 320px; }
+  .figureBody { padding: var(--s2); }
+  .lightbox { padding: var(--s2); }
+  .lightboxBar { left: var(--s3); right: var(--s3); top: var(--s2); }
+}

@@ -108,6 +108,13 @@ export const IncidentMap: React.FC<IncidentMapProps> = ({
   const [basemap, setBasemap] = useState<BasemapId>(defaultBasemap);
   const [layers, setLayers] = useState<MapLayerState>({ ...DEFAULT_LAYERS, ...layerOverrides });
 
+  /* At 390px the layer panel covers most of the map, so on small screens it
+     starts collapsed behind its own icon and opens on tap. Desktop is
+     unchanged — the panel is genuinely useful there and there is room for it. */
+  const isNarrow =
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 700px)').matches;
+  const [layersOpen, setLayersOpen] = useState(!isNarrow);
+
   const vessel = incident.vessel;
   const vesselAt: Coordinates = { latitude: vessel.latitude, longitude: vessel.longitude };
 
@@ -326,11 +333,19 @@ export const IncidentMap: React.FC<IncidentMapProps> = ({
       {/* ---- Floating overlays. LAW 3: glass lives only here. ---- */}
       {showLayerPanel && (
         <MapSlot at="tl">
-          <div className={`${s.float} ${s.layerPanel}`}>
-            <div className={s.layerPanelHead}>
-              <Eyebrow>Map layers</Eyebrow>
-              <Layers size={13} strokeWidth={1.5} color="var(--text-faint)" />
-            </div>
+          <div className={`${s.float} ${layersOpen ? s.layerPanel : s.layerPanelClosed}`}>
+            <button
+              type="button"
+              className={s.layerPanelHead}
+              aria-expanded={layersOpen}
+              aria-label={layersOpen ? 'Hide map layers' : 'Show map layers'}
+              onClick={() => setLayersOpen((v) => !v)}
+            >
+              {layersOpen && <Eyebrow>Map layers</Eyebrow>}
+              <Layers size={15} strokeWidth={1.5} color="var(--text-faint)" />
+            </button>
+            {layersOpen && (
+            <>
             <Toggle
               checked={layers.zones}
               onChange={(v) => setLayers((p) => ({ ...p, zones: v }))}
@@ -386,6 +401,8 @@ export const IncidentMap: React.FC<IncidentMapProps> = ({
             <span className={s.provenance}>
               {BASEMAPS.find((b) => b.id === basemap)?.provenance}
             </span>
+            </>
+            )}
           </div>
         </MapSlot>
       )}

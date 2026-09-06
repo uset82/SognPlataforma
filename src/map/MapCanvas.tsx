@@ -91,6 +91,11 @@ export const MapCanvas: React.FC<MapCanvasProps> = ({
         pitch,
         interactive,
         attributionControl: { compact: true },
+        /* On touch devices the map sits inside a scrolling column, so a
+           one-finger drag must scroll the page, not pan the map — otherwise
+           the map becomes a trap you cannot scroll past. Two fingers pan.
+           Left off for mouse users, where it would only add friction. */
+        cooperativeGestures: window.matchMedia('(pointer: coarse)').matches,
         // The console owns keyboard focus; the map should not steal arrow keys.
         keyboard: false,
       });

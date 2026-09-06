@@ -120,3 +120,40 @@ table { border-collapse: collapse; width: 100%; }
   border-radius: 0 0 var(--r-sm) 0;
 }
 .maplibregl-canvas:focus-visible { outline: 2px solid var(--fjord-on); outline-offset: -2px; }
+
+/* ============================================================================
+   PHONE
+   The console is a desktop instrument first, but it has to survive a 390 px
+   screen — a commander checking status on the way to the EOC, or a classmate
+   opening the demo link on their phone.
+
+   Two structural changes make the rest possible:
+     1. the shell stops being a fixed-height grid and lets `main` scroll;
+     2. the navigation rail moves to a thumb-reachable bottom bar.
+   ============================================================================ */
+@media (max-width: 700px) {
+  body {
+    /* The desktop console never scrolls as a whole; the phone layout must. */
+    overflow: auto;
+    -webkit-text-size-adjust: 100%;
+    /* Keep content clear of the notch and the home indicator. */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Touch targets. Pointer-coarse rather than a width query, so it also applies
+   to tablets and touch laptops. 44 px is the iOS minimum. */
+@media (pointer: coarse) {
+  button,
+  [role='switch'],
+  [role='tab'] {
+    min-height: 34px;
+  }
+  /* Momentum scrolling inside panels. */
+  .scroll-y,
+  [class*='scrollPanel'],
+  [class*='feed'] {
+    -webkit-overflow-scrolling: touch;
+  }
+}

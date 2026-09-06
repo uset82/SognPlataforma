@@ -149,7 +149,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--s2);
+  width: 100%;
   margin-bottom: var(--s2);
+  color: inherit;
 }
 .readout { padding: var(--s3); min-width: 156px; display: flex; flex-direction: column; gap: var(--s2); }
 .readoutRow {
@@ -197,3 +200,27 @@
   pointer-events: none;
 }
 .float > * { position: relative; }
+
+/* Collapsed layer panel: just its icon, tappable, out of the map's way. */
+.layerPanelClosed {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+.layerPanelClosed .layerPanelHead { margin: 0; }
+
+@media (max-width: 700px) {
+  .layerPanel { width: 168px; }
+  /* The vessel callout competes with a small map; the same numbers are in the
+     KPI rail directly below it. */
+  .vesselCallout { display: none; }
+  /* At phone zoom the map is ~330px tall and every label lands on top of every
+     other one. The zone chips carry the information that changes a decision;
+     the pin discs stay, their text goes, and the place name goes with it —
+     the basemap and the KPI rail below both name the location already. */
+  .pinLabel,
+  .place { display: none; }
+  .basemapRow { flex-wrap: wrap; }
+}
