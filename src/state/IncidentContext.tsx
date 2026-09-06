@@ -2,9 +2,15 @@ import React, { createContext, useContext, useState, useEffect, useMemo, useCall
 import { Incident } from '../types/incident';
 import { EmergencyAgent, AgentLogMessage } from '../types/agents';
 import { TimelineStage, PlaybackSpeed } from '../types/scenario';
-import { CivilianHelpRequest, SafeMusterRecord, HelpRequestState } from '../types/civilian';
+import {
+  CivilianHelpRequest,
+  SafeMusterRecord,
+  HelpRequestState,
+  HelpCondition,
+  TriageSeverity,
+} from '../types/civilian';
 import { LandingStatusCard } from '../types/landing';
-import { INITIAL_INCIDENT, INITIAL_HELP_REQUESTS, INITIAL_MUSTER_RECORDS, INITIAL_LANDING_STATUS_CARD, INITIAL_LOG_MESSAGES } from '../data/initialIncident';
+import { INITIAL_SAFE_ZONE, INITIAL_INCIDENT, INITIAL_HELP_REQUESTS, INITIAL_MUSTER_RECORDS, INITIAL_LANDING_STATUS_CARD, INITIAL_LOG_MESSAGES } from '../data/initialIncident';
 import { INITIAL_AGENTS } from '../data/agents';
 import { SCENARIO_TIMELINE } from '../data/scenario';
 import {
@@ -14,6 +20,38 @@ import {
   endBackendScenario,
   acknowledgeBackendHelp,
 } from '../services/simulatorSync';
+import { distanceMeters } from '../lib/geo';
+
+/* ---------------------------------------------------------------------------
+   Triage normalisation.
+
+   The civilian app posts the long-form codes from its own HelpCondition union
+   ('I_AM_TRAPPED', 'I_AM_INJURED', ...). Earlier code compared these against
+   short codes ('TRAPPED', 'INJURED'), so every live signal fell through to
+   OTHER_URGENT_HELP / URGENT — a trapped civilian reached the console as a
+   low-priority "other" request. Match on substrings so both wire formats work.
+   --------------------------------------------------------------------------- */
+const normaliseCondition = (raw: string): HelpCondition => {
+  const c = (raw || '').toUpperCase();
+  if (c.includes('TRAPPED')) return 'I_AM_TRAPPED';
+  if (c.includes('INJURED')) return 'I_AM_INJURED';
+  if (c.includes('CANNOT_WALK') || c.includes('NON_AMBULATORY')) return 'I_CANNOT_WALK';
+  if (c.includes('WITH_PEOPLE')) return 'I_AM_WITH_PEOPLE_WHO_NEED_HELP';
+  return 'OTHER_URGENT_HELP';
+};
+
+const severityFor = (condition: HelpCondition): TriageSeverity => {
+  switch (condition) {
+    case 'I_AM_TRAPPED':
+    case 'I_AM_INJURED':
+      return 'CRITICAL';
+    case 'I_CANNOT_WALK':
+    case 'I_AM_WITH_PEOPLE_WHO_NEED_HELP':
+      return 'URGENT';
+    default:
+      return 'STANDARD';
+  }
+};
 
 export type PlatformModule =
   | 'dashboard'
@@ -167,18 +205,27 @@ export const IncidentProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setHelpRequests((prev) => {
           const map = new Map(prev.map((r) => [r.id, r]));
           state.helpRequests.forEach((req) => {
-            const mappedCondition = (
-              req.condition === 'INJURED' ? 'I_AM_INJURED' :
-              req.condition === 'TRAPPED' ? 'I_AM_TRAPPED' :
-              req.condition === 'CANNOT_WALK' ? 'I_CANNOT_WALK' :
-              'OTHER_URGENT_HELP'
-            );
-            const mappedSeverity = (
-              req.condition === 'TRAPPED' || req.condition === 'INJURED' ? 'CRITICAL' : 'URGENT'
-            );
+            const mappedCondition = normaliseCondition(req.condition);
+            const mappedSeverity = severityFor(mappedCondition);
             const mappedState = req.state === 'ACKNOWLEDGED' ? 'ACKNOWLEDGED' : 'RECEIVED';
-            const lat = req.approximateLocation?.latitude || 60.8624;
-            const lng = req.approximateLocation?.longitude || 7.1145;
+
+            /* The app posts `location` as a place name today and as a coordinate
+               object once GPS is granted. Read whichever arrived instead of
+               silently dropping both onto one fallback pin. */
+            const loc = req.approximateLocation;
+            const hasFix =
+              !!loc && typeof loc === 'object' && typeof loc.latitude === 'number';
+            const lat = hasFix ? (loc as { latitude: number }).latitude : 60.8624;
+            const lng = hasFix ? (loc as { longitude: number }).longitude : 7.1145;
+            const where = hasFix
+              ? 'Live GPS pin from citizen app'
+              : typeof loc === 'string' && loc.trim()
+                ? loc
+                : 'Live signal — no GPS fix';
+            const toSafeZone = distanceMeters(
+              { latitude: lat, longitude: lng },
+              { latitude: INITIAL_SAFE_ZONE.latitude, longitude: INITIAL_SAFE_ZONE.longitude }
+            );
 
             const existing = map.get(req.id);
             if (existing) {
@@ -194,8 +241,8 @@ export const IncidentProvider: React.FC<{ children: React.ReactNode }> = ({ chil
                 condition: mappedCondition,
                 severity: mappedSeverity,
                 coordinates: { latitude: lat, longitude: lng },
-                distanceToHospitalMeters: 420,
-                locationDescription: 'Live Mobile Distress Signal (GPS Pin)',
+                distanceToHospitalMeters: toSafeZone,
+                locationDescription: where,
                 timestamp: req.timestamp,
                 state: mappedState,
                 responderNotes: req.responderNotes,

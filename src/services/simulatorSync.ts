@@ -5,7 +5,10 @@ export interface SimulatorState {
     id: string;
     condition: string;
     deviceId: string;
-    approximateLocation?: { latitude: number; longitude: number; accuracyMeters?: number };
+    /* The civilian app currently posts this as a free-text place name, while a
+       GPS-capable client posts a coordinate object. Both shapes occur on the
+       wire, so both are modelled here rather than assuming one. */
+    approximateLocation?: string | { latitude: number; longitude: number; accuracyMeters?: number };
     timestamp: string;
     state: string;
     responderNotes?: string;
