@@ -148,15 +148,26 @@
 
 @media (max-width: 700px) {
   .wrap {
+    /* height:100% with auto rows makes the rows overflow a fixed-height box,
+       and `overflow: visible` then paints them straight over one another —
+       the slide index and the summary panel collided on a real iPhone.
+       Height is content-driven here; `main` owns the scroll. */
+    height: auto;
+    min-height: 0;
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto;
-    overflow-y: auto;
+    overflow: visible;
     gap: var(--s2);
   }
-  .side { overflow: visible; }
+  .side { overflow: visible; min-height: 0; }
   /* On a phone the gallery leads; the index follows it. */
-  .stage { order: -1; }
+  .stage { order: -1; min-height: 0; }
   .figure { min-height: 320px; }
+  /* Eyebrow and the prev/next controls share the first row; the title gets the
+     full width beneath them instead of being squeezed into four wrapped lines
+     between the two. */
+  .figureHead { flex-wrap: wrap; row-gap: var(--s1); }
+  .figureTitle { order: 3; flex-basis: 100%; font-size: var(--t-13); }
   .figureBody { padding: var(--s2); }
   .lightbox { padding: var(--s2); }
   .lightboxBar { left: var(--s3); right: var(--s3); top: var(--s2); }
