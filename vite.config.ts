@@ -46,7 +46,12 @@ export default defineConfig({
   },
 
   server: {
-    port: 5173,
+    // Honour an assigned PORT when one is supplied (the Claude Code preview
+    // runner and most hosts set it), otherwise keep Vite's usual 5173 so
+    // `npm run dev` behaves exactly as before. Nothing here is port-specific:
+    // there are no OAuth callbacks or webhooks, and the civilian app talks to
+    // the simulator on :4000, not to this server.
+    port: Number(process.env.PORT) || 5173,
     host: true,
     proxy: {
       '/api': {
