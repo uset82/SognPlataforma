@@ -8,6 +8,8 @@
  * - fish-audio/s2.1-pro-free:free
  */
 
+import { apiUrl } from './apiBase';
+
 export interface AgentSdkQueryOptions {
   agentName: string;
   agentRole: string;
@@ -41,7 +43,7 @@ export async function queryAgentWithSdk(options: AgentSdkQueryOptions): Promise<
   const { agentName, agentRole, userPrompt, model = 'minimax/minimax-m3:free', context } = options;
 
   try {
-    const res = await fetch('/api/agent/chat', {
+    const res = await fetch(apiUrl('/api/agent/chat'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +84,7 @@ export async function queryAgentWithSdk(options: AgentSdkQueryOptions): Promise<
  */
 export async function synthesizeSpeech(text: string, model: string = 'fish-audio/s2.1-pro-free:free'): Promise<{ audioBase64: string | null; mimeType: string }> {
   try {
-    const res = await fetch('/api/audio/speech', {
+    const res = await fetch(apiUrl('/api/audio/speech'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

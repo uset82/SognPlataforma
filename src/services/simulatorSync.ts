@@ -1,3 +1,5 @@
+import { apiUrl } from './apiBase';
+
 export interface SimulatorState {
   activeIncident: any | null;
   registeredDevices: Array<{ deviceId: string; pushToken?: string }>;
@@ -30,7 +32,7 @@ export interface SimulatorState {
 
 export async function fetchSimulatorState(): Promise<SimulatorState | null> {
   try {
-    const res = await fetch('/api/state');
+    const res = await fetch(apiUrl('/api/state'));
     if (!res.ok) return null;
     return await res.json();
   } catch (err) {
@@ -40,7 +42,7 @@ export async function fetchSimulatorState(): Promise<SimulatorState | null> {
 
 export async function triggerBackendFlamScenario(): Promise<boolean> {
   try {
-    const res = await fetch('/api/scenario/flam', { method: 'POST' });
+    const res = await fetch(apiUrl('/api/scenario/flam'), { method: 'POST' });
     return res.ok;
   } catch (err) {
     return false;
@@ -49,7 +51,7 @@ export async function triggerBackendFlamScenario(): Promise<boolean> {
 
 export async function triggerBackendReroute(): Promise<boolean> {
   try {
-    const res = await fetch('/api/scenario/reroute', { method: 'POST' });
+    const res = await fetch(apiUrl('/api/scenario/reroute'), { method: 'POST' });
     return res.ok;
   } catch (err) {
     return false;
@@ -58,7 +60,7 @@ export async function triggerBackendReroute(): Promise<boolean> {
 
 export async function endBackendScenario(): Promise<boolean> {
   try {
-    const res = await fetch('/api/scenario/end', { method: 'POST' });
+    const res = await fetch(apiUrl('/api/scenario/end'), { method: 'POST' });
     return res.ok;
   } catch (err) {
     return false;
@@ -67,7 +69,7 @@ export async function endBackendScenario(): Promise<boolean> {
 
 export async function acknowledgeBackendHelp(id: string): Promise<boolean> {
   try {
-    const res = await fetch('/api/help/acknowledge', {
+    const res = await fetch(apiUrl('/api/help/acknowledge'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
