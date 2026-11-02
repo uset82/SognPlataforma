@@ -35,15 +35,15 @@ const SLIDES: Slide[] = [
     title: 'Shared incident picture',
     image: '/prototypes/platform-dashboard.png',
     caption:
-      'The incident dashboard concept. Cartography carries the situation; the right rail answers what a commander must know in one second — time to impact, people at risk, evacuation progress.',
+      'The incident dashboard concept. Cartography carries the situation; the right rail answers what a commander must know in one second — time to the quay, people at risk, evacuation progress.',
   },
   {
     id: 'preimpact',
     kind: 'Professional platform',
-    title: 'Fifteen minutes before impact',
+    title: 'Fifteen minutes to the quay',
     image: '/prototypes/platform-preimpact.png',
     caption:
-      'The pre-impact risk view. Vessel telemetry on the left, the drift geometry in the middle, and the pre-approved response on the right — so the decision is a confirmation, not an invention.',
+      'The pre-arrival risk view. Vessel telemetry on the left, the smoke and hazard geometry in the middle, and the pre-approved response on the right — so the decision is a confirmation, not an invention.',
   },
   {
     id: 'agents',

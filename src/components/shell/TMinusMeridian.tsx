@@ -33,7 +33,7 @@ export const TMinusMeridian: React.FC = () => {
     <div
       className={s.meridian}
       role="img"
-      aria-label={`Pre-impact meridian. ${countdown(remaining)} remaining until estimated impact.`}
+      aria-label={`Pre-arrival meridian. ${countdown(remaining)} remaining until estimated arrival at the quay.`}
     >
       <div className={s.meridianLine} />
       <div className={s.meridianElapsed} style={{ width: `${elapsed * 100}%` }} />
@@ -53,7 +53,7 @@ export const TMinusMeridian: React.FC = () => {
                   transform: m === 0 ? 'translateX(2px)' : m === minutes ? 'translateX(-100%)' : undefined,
                 }}
               >
-                {m === minutes ? 'IMPACT' : `T−${minutes - m}`}
+                {m === minutes ? 'QUAY' : `T−${minutes - m}`}
               </span>
             )}
           </React.Fragment>
