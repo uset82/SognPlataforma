@@ -53,7 +53,7 @@ To maintain engineering discipline, autonomous execution is partitioned into spe
 - **Tools & Permissions**: CSS custom properties, component construction, WebDesigner CLI audit (`wd audit`).
 
 ### 3.3. Simulation & Playbook Agent
-- **Mission**: Drive the interactive 15-minute pre-impact emergency timeline (Scenario F-03: Flåm Vessel Collision Risk).
+- **Mission**: Drive the interactive 15-minute pre-impact emergency timeline (Scenario F-03: Fjordvik Vessel Fire & Emergency Landing).
 - **Responsibilities**:
   - Implement the T-15 to T-0 timeline state machine.
   - Bind scenario events to dashboard metrics, GIS hazard layers, and responder notifications.

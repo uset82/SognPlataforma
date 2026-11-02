@@ -2,7 +2,7 @@ import type { Coordinates, HazardZone, EvacuationRoute } from '../types/incident
 
 /* ============================================================================
    GeoJSON adapters.
-   The existing data layer already stores true Flam coordinates, so nothing is
+   The existing data layer already stores true Fjordvik coordinates, so nothing is
    invented here — these are pure shape conversions from the domain types in
    src/types/incident.ts into what MapLibre sources expect.
    ============================================================================ */

@@ -72,8 +72,8 @@ const severityClass: Record<CivilianHelpRequest['severity'], string> = {
 
 /* Helipads named in the mockups. Fixed drill geography, not live data. */
 const HELIPADS: Array<{ id: string; name: string; at: Coordinates }> = [
-  { id: 'heli-1', name: 'Helipad 1 · Flåm School Field', at: { latitude: 60.8664, longitude: 7.1158 } },
-  { id: 'heli-2', name: 'Helipad 2 · Flåm Gym Field', at: { latitude: 60.8607, longitude: 7.1193 } },
+  { id: 'heli-1', name: 'Helipad 1 · Fjordvik School Field', at: { latitude: 60.8664, longitude: 7.1158 } },
+  { id: 'heli-2', name: 'Helipad 2 · Fjordvik Gym Field', at: { latitude: 60.8607, longitude: 7.1193 } },
 ];
 
 export interface IncidentMapProps {
@@ -235,7 +235,7 @@ export const IncidentMap: React.FC<IncidentMapProps> = ({
       {/* ---- Zone labels ---- */}
       {layers.zones &&
         incident.zones.map((z) => (
-          /* Zone A and Zone B share almost the same centroid over Flåm, so the
+          /* Zone A and Zone B share almost the same centroid over Fjordvik, so the
              labels are pushed apart vertically instead of stacking on top of
              each other. */
           <MapMarker
@@ -249,14 +249,14 @@ export const IncidentMap: React.FC<IncidentMapProps> = ({
                 z.level === 'CRITICAL_IMPACT' ? s.zoneCritical : s.zoneWarning
               }`}
             >
-              {z.level === 'CRITICAL_IMPACT' ? 'Zone A · Impact' : 'Zone B · Warning'}
+              {z.level === 'CRITICAL_IMPACT' ? 'Zone A · Quay & Waterfront' : 'Zone B · Warning'}
             </span>
           </MapMarker>
         ))}
 
       {/* ---- Place name. Sits west of the zone chips so the two never collide. ---- */}
       <MapMarker lngLat={[7.1078, 60.8598]} z={3}>
-        <span className={s.place}>FLÅM</span>
+        <span className={s.place}>FJORDVIK</span>
       </MapMarker>
 
       {/* ---- Safe zone ---- */}
@@ -323,7 +323,7 @@ export const IncidentMap: React.FC<IncidentMapProps> = ({
                 <span>{nm(vessel.distanceToHarborNm)} nm</span>
               </span>
               <span className={s.vesselEta}>
-                ETA IMPACT {countdown(vessel.estimatedTimeToImpactSeconds)}
+                ETA TO QUAY {countdown(vessel.estimatedTimeToImpactSeconds)}
               </span>
             </span>
           )}

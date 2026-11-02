@@ -15,7 +15,7 @@ import { INITIAL_AGENTS } from '../data/agents';
 import { SCENARIO_TIMELINE } from '../data/scenario';
 import {
   fetchSimulatorState,
-  triggerBackendFlamScenario,
+  triggerBackendEmergencyScenario,
   triggerBackendReroute,
   endBackendScenario,
   acknowledgeBackendHelp,
@@ -147,7 +147,7 @@ export const IncidentProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           next.defaultRoute = {
             ...next.defaultRoute,
             routeStatus: 'HAZARD_REROUTED',
-            primaryInstruction: 'REROUTED: FLÅMSVEGEN AROUND FRETHEIM',
+            primaryInstruction: 'REROUTED: FJORDVIKVEGEN AROUND FRETHEIM',
             secondaryInstruction: 'Waterfront is physically cordoned off by Police. Follow green lighted signs.',
           };
         }
@@ -262,7 +262,7 @@ export const IncidentProvider: React.FC<{ children: React.ReactNode }> = ({ chil
               map.set(sr.id, {
                 id: sr.id,
                 civilianAlias: sr.deviceId,
-                safeZoneId: 'safe-flam-school',
+                safeZoneId: 'safe-zone-fjordvik-school',
                 safeZoneName: sr.safeZoneName,
                 timestamp: sr.timestamp,
                 isWithFamily: false,
@@ -365,7 +365,7 @@ export const IncidentProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const broadcastPublicAlert = useCallback(() => {
     setIsAlertBroadcasted(true);
-    triggerBackendFlamScenario();
+    triggerBackendEmergencyScenario();
     setIncident((prev) => ({
       ...prev,
       civiliansNotifiedCount: 2843,

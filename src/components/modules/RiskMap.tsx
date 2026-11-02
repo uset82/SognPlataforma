@@ -4,7 +4,7 @@ import { Ship, ShieldPlus, ExternalLink, Timer, Compass, Anchor, Users, Eye, Gau
 import { IncidentMap } from '../../map/IncidentMap';
 import { Button, Eyebrow, Metric, Panel, Pill } from '../primitives';
 import { useIncident } from '../../state/IncidentContext';
-import { bearing, compass, countdown, humanise, knots, latLon, meters, num } from '../../lib/format';
+import { bearing, compass, countdown, knots, latLon, meters, num } from '../../lib/format';
 import s from './modules.module.css';
 
 /* ============================================================================
@@ -75,7 +75,7 @@ export const RiskMap: React.FC = () => {
 
           <div className={s.specRow}>
             <span className={s.specLabel}>Loss of manoeuvrability</span>
-            <Pill tone="critical">{humanise(v.steeringStatus)}</Pill>
+            <Pill tone="critical">Engine-room fire · smoke on two decks</Pill>
           </div>
 
           <SpecRow label="Last AIS update" mono>
@@ -111,14 +111,14 @@ export const RiskMap: React.FC = () => {
               <ShieldPlus size={15} strokeWidth={1.8} />
               <Eyebrow>Pre-approved scenario F-03</Eyebrow>
             </span>
-            Activate the Flåm evacuation plan: alert the public, alert police, paramedics, hospital
+            Activate the Fjordvik evacuation plan: alert the public, alert police, paramedics, hospital
             and helicopters, and close harbour access. Human sign-off is required before any
             statutory action is dispatched.
           </div>
 
           <div style={{ marginTop: 'var(--s3)' }}>
             <span className={s.specLabel}>Playbook</span>
-            <div className={s.specValue}>Flåm Evacuation Plan · version 3.2</div>
+            <div className={s.specValue}>Fjordvik Evacuation Plan · version 3.2</div>
           </div>
 
           <div style={{ display: 'flex', gap: 'var(--s2)', marginTop: 'var(--s3)' }}>
@@ -145,7 +145,7 @@ export const RiskMap: React.FC = () => {
       <div className={s.riskStrip}>
         <div className={s.kpiCell}>
           <Metric
-            label="ETA to impact"
+            label="ETA to quay"
             icon={<Timer size={11} strokeWidth={1.8} />}
             value={countdown(currentStage.tSeconds)}
             size="md"
@@ -155,7 +155,7 @@ export const RiskMap: React.FC = () => {
         </div>
         <div className={s.kpiCell}>
           <Metric
-            label="Distance to impact"
+            label="Distance to quay"
             icon={<Compass size={11} strokeWidth={1.8} />}
             value={v.distanceToHarborNm.toFixed(2)}
             unit="nm"
@@ -190,7 +190,7 @@ export const RiskMap: React.FC = () => {
             value={num(atRisk)}
             size="md"
             tone="warning"
-            sub="In Flåm area"
+            sub="In Fjordvik area"
           />
         </div>
         <div className={s.kpiCell}>

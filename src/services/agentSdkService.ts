@@ -73,7 +73,7 @@ export async function queryAgentWithSdk(options: AgentSdkQueryOptions): Promise<
 
   // Graceful fallback simulation if server is temporarily unreachable
   return {
-    text: `[${agentName}] Analysis for: "${userPrompt}". Operational constraint: maintain civilian evacuation route to Flåm School while monitoring Aurlandsfjorden wind vectors.`,
+    text: `[${agentName}] Analysis for: "${userPrompt}". Operational constraint: maintain civilian evacuation route to Fjordvik School while monitoring Aurlandsfjorden wind vectors.`,
     model: model,
     action: 'MONITOR_CORRIDOR',
   };

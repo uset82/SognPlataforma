@@ -4,13 +4,13 @@ import { LandingStatusCard } from '../types/landing';
 import { AgentLogMessage } from '../types/agents';
 
 export const INITIAL_SAFE_ZONE: SafeZone = {
-  id: 'safe-zone-flam-school',
-  name: 'Flåm School Safe Area',
+  id: 'safe-zone-fjordvik-school',
+  name: 'Fjordvik School Safe Area',
   distanceMeters: 650,
   walkMinutes: 8,
   status: 'OPEN_AND_CONFIRMED',
   shortDescription: 'Primary municipal evacuation reception point, designated heating shelter & medical triage.',
-  address: 'Nedre Flåm 12, 5743 Flåm',
+  address: 'Nedre Fjordvik 12, 5743 Fjordvik',
   elevationMeters: 28,
   capacity: 850,
   currentOccupancy: 312,
@@ -23,7 +23,7 @@ export const INITIAL_SAFE_ZONE: SafeZone = {
 export const INITIAL_HAZARD_ZONES: HazardZone[] = [
   {
     id: 'zone-a-waterfront',
-    name: 'Zone A - Primary Impact Waterfront',
+    name: 'Zone A - Quay & Waterfront',
     level: 'CRITICAL_IMPACT',
     polygon: [
       { latitude: 60.8635, longitude: 7.1120 },
@@ -38,7 +38,7 @@ export const INITIAL_HAZARD_ZONES: HazardZone[] = [
   },
   {
     id: 'zone-b-warning',
-    name: 'Zone B - Secondary Warning & Debris Buffer',
+    name: 'Zone B - Secondary Warning & Smoke Buffer',
     level: 'WARNING_PERIMETER',
     polygon: [
       { latitude: 60.8655, longitude: 7.1090 },
@@ -54,11 +54,11 @@ export const INITIAL_HAZARD_ZONES: HazardZone[] = [
 ];
 
 export const INITIAL_DEFAULT_ROUTE: EvacuationRoute = {
-  routeId: 'route-north-flam-school',
+  routeId: 'route-north-fjordvik-school',
   destinationSafeZone: INITIAL_SAFE_ZONE,
   remainingDistanceMeters: 650,
   estimatedWalkingMinutes: 8,
-  primaryInstruction: 'CONTINUE NORTH ON FLÅMSVEGEN',
+  primaryInstruction: 'CONTINUE NORTH ON FJORDVIKVEGEN',
   secondaryInstruction: 'Avoid harbour promenade; turn left past bakery toward school muster yard.',
   routeStatus: 'CLEAR',
   blockedAreas: ['Waterfront Quay 1 & 2', 'Harbourfront Promenade'],
@@ -72,7 +72,7 @@ export const INITIAL_DEFAULT_ROUTE: EvacuationRoute = {
 };
 
 export const INITIAL_VESSEL: VesselTelemetry = {
-  name: 'M/S Viking Glory',
+  name: 'MS Nordic Horizon',
   callSign: 'LAKX9',
   mmsi: '257832000',
   vesselType: 'Passenger Cruise Ferry (218m)',
@@ -82,22 +82,22 @@ export const INITIAL_VESSEL: VesselTelemetry = {
   headingDegrees: 194,
   bearingToHarborDegrees: 196,
   distanceToHarborNm: 1.9,
-  passengersOnBoard: 2240,
-  crewOnBoard: 180,
+  passengersOnBoard: 3200,
+  crewOnBoard: 1100,
   steeringStatus: 'TOTAL_LOSS',
   estimatedTimeToImpactSeconds: 900,
 };
 
 export const INITIAL_INCIDENT: Incident = {
   id: 'inc-2026-f03',
-  code: 'INC-2026-F03: FLÅM VESSEL CRITICAL DRIFT',
-  title: 'Passenger Vessel Uncontrolled Drift Toward Flåm Waterfront',
-  shortDescription: 'M/S Viking Glory has suffered complete rudder hydraulic failure and is drifting toward the primary cruise pier and civilian promenade.',
-  type: 'VESSEL_COLLISION',
+  code: 'INC-2026-F03: VESSEL FIRE · FJORDVIK QUAY',
+  title: 'Engine-room fire aboard MS Nordic Horizon',
+  shortDescription: 'MS Nordic Horizon has an engine-room fire with smoke on two decks. Vessel is making for Fjordvik quay under escort for emergency landing.',
+  type: 'VESSEL_FIRE',
   severity: 'CRITICAL',
   status: 'ACTIVE',
-  locationName: 'Indre Sogn / Aurlandsfjorden / Flåm',
-  affectedZoneName: 'Zone A - Waterfront & Flåm Kai',
+  locationName: 'Indre Sogn / Aurlandsfjorden / Fjordvik',
+  affectedZoneName: 'Zone A - Waterfront & Fjordvik Kai',
   createdTimestamp: '2026-09-06T15:17:00Z',
   lastVerifiedTimestamp: '2026-09-06T15:32:00Z',
   vessel: INITIAL_VESSEL,
@@ -117,7 +117,7 @@ export const INITIAL_HELP_REQUESTS: CivilianHelpRequest[] = [
     severity: 'CRITICAL',
     coordinates: { latitude: 60.8629, longitude: 7.1148 },
     distanceToHospitalMeters: 420,
-    locationDescription: 'Near Flåm railway ticket booth, twisted ankle, unable to carry child.',
+    locationDescription: 'Near Fjordvik railway ticket booth, twisted ankle, unable to carry child.',
     timestamp: '2026-09-06T15:26:12Z',
     state: 'RECEIVED',
     responderNotes: 'Nearest responder: Police Patrol 1 (180m away).',
@@ -141,7 +141,7 @@ export const INITIAL_HELP_REQUESTS: CivilianHelpRequest[] = [
     severity: 'STANDARD',
     coordinates: { latitude: 60.8636, longitude: 7.1152 },
     distanceToHospitalMeters: 380,
-    locationDescription: 'Fretheim Fjordhytter cabin area, slow mobility.',
+    locationDescription: 'Fjordvik Fjordhytter cabin area, slow mobility.',
     timestamp: '2026-09-06T15:29:10Z',
     state: 'RECEIVED',
   },
@@ -167,40 +167,40 @@ export const INITIAL_HELP_REQUESTS: CivilianHelpRequest[] = [
     locationDescription: 'Fjord park bench, lost passport and medication bag during rush.',
     timestamp: '2026-09-06T15:31:22Z',
     state: 'ACKNOWLEDGED',
-    responderNotes: 'Directed to Red Cross desk at Flåm School.',
+    responderNotes: 'Directed to Red Cross desk at Fjordvik School.',
   },
 ];
 
 export const INITIAL_MUSTER_RECORDS: SafeMusterRecord[] = [
-  { id: 'mus-01', civilianAlias: 'Civilian #2201', safeZoneId: 'safe-zone-flam-school', safeZoneName: 'Flåm School Safe Area', timestamp: '15:22:10', isWithFamily: true },
-  { id: 'mus-02', civilianAlias: 'Civilian #5190', safeZoneId: 'safe-zone-flam-school', safeZoneName: 'Flåm School Safe Area', timestamp: '15:23:44', isWithFamily: false },
-  { id: 'mus-03', civilianAlias: 'Civilian #7812', safeZoneId: 'safe-zone-flam-school', safeZoneName: 'Flåm School Safe Area', timestamp: '15:25:01', isWithFamily: true },
-  { id: 'mus-04', civilianAlias: 'Civilian #1044', safeZoneId: 'safe-zone-flam-school', safeZoneName: 'Flåm School Safe Area', timestamp: '15:27:18', isWithFamily: false },
+  { id: 'mus-01', civilianAlias: 'Civilian #2201', safeZoneId: 'safe-zone-fjordvik-school', safeZoneName: 'Fjordvik School Safe Area', timestamp: '15:22:10', isWithFamily: true },
+  { id: 'mus-02', civilianAlias: 'Civilian #5190', safeZoneId: 'safe-zone-fjordvik-school', safeZoneName: 'Fjordvik School Safe Area', timestamp: '15:23:44', isWithFamily: false },
+  { id: 'mus-03', civilianAlias: 'Civilian #7812', safeZoneId: 'safe-zone-fjordvik-school', safeZoneName: 'Fjordvik School Safe Area', timestamp: '15:25:01', isWithFamily: true },
+  { id: 'mus-04', civilianAlias: 'Civilian #1044', safeZoneId: 'safe-zone-fjordvik-school', safeZoneName: 'Fjordvik School Safe Area', timestamp: '15:27:18', isWithFamily: false },
 ];
 
 export const INITIAL_LANDING_STATUS_CARD: LandingStatusCard = {
-  id: 'card-viking-glory-landing',
-  vesselName: 'M/S Viking Glory',
+  id: 'card-nordic-horizon-landing',
+  vesselName: 'MS Nordic Horizon',
   callSign: 'LAKX9',
-  assignedQuay: 'FLAM_CRUISE_KAI',
-  quayDisplayName: 'Flåm Cruise Kai (Berth 1 - Deepwater)',
-  totalPeopleToLand: 2420,
+  assignedQuay: 'FJORDVIK_CRUISE_KAI',
+  quayDisplayName: 'Fjordvik Cruise Kai (Berth 1 - Deepwater)',
+  totalPeopleToLand: 4300,
   conditionSummary: {
-    uninjuredCount: 2392,
-    minorInjuriesCount: 22,
-    moderateInjuriesCount: 6,
-    criticalCareCount: 0,
+    uninjuredCount: 4262,
+    minorInjuriesCount: 28,
+    moderateInjuriesCount: 8,
+    criticalCareCount: 2,
   },
-  estimatedTimeOfBerthing: 'T-00:00 (Emergency Grounding/Mooring)',
+  estimatedTimeOfBerthing: 'T-00:00 (Emergency Landing / Mooring)',
   dockTeamPreparedness: 'READY_TO_RECEIVE',
   liaisonContact: 'Chief Officer Lindqvist (VHF Ch 16 / Sogn Safe Liaison)',
   lastUpdatedTimestamp: '2026-09-06T15:32:00Z',
 };
 
 export const INITIAL_LOG_MESSAGES: AgentLogMessage[] = [
-  { id: 'msg-01', agentId: 'ship', agentName: 'SHIP AGENT', timestamp: '15:15:00', stageT: 'T-15', content: 'Vessel reporting loss of steering hydraulic pressure. Speed 5.2 knots.', type: 'ALERT' },
+  { id: 'msg-01', agentId: 'ship', agentName: 'SHIP AGENT', timestamp: '15:15:00', stageT: 'T-15', content: 'Vessel reporting engine-room fire. Smoke on decks 4 and 5. Speed 5.2 knots.', type: 'ALERT' },
   { id: 'msg-02', agentId: 'main', agentName: 'MAIN ORCHESTRATOR', timestamp: '15:16:00', stageT: 'T-13', content: 'Scenario Playbook F-03 initiated. Distributing tasks across emergency network.', type: 'ACTION' },
-  { id: 'msg-03', agentId: 'risk', agentName: 'RISK AGENT', timestamp: '15:17:30', stageT: 'T-12', content: 'Hazard geometry calculated: Zone A (immediate waterfront), Zone B (warning). 2,843 citizens at risk.', type: 'INFO' },
+  { id: 'msg-03', agentId: 'risk', agentName: 'RISK AGENT', timestamp: '15:17:30', stageT: 'T-12', content: 'Hazard geometry calculated: Zone A (quay & waterfront), Zone B (smoke buffer). 2,843 citizens at risk.', type: 'INFO' },
   { id: 'msg-04', agentId: 'response', agentName: 'RESPONSE AGENT', timestamp: '15:18:45', stageT: 'T-11', content: 'Police, fire, hospital, and port authorities notified via digital tasks.', type: 'INFO' },
   { id: 'msg-05', agentId: 'public_alert', agentName: 'PUBLIC ALERT AGENT', timestamp: '15:20:00', stageT: 'T-9', content: 'Civilian warning template F-03 ready. Requesting human commander sign-off.', type: 'AUTHORIZATION_REQUEST', authorized: true },
 ];

@@ -21,7 +21,7 @@ import s from './modules.module.css';
    ============================================================================ */
 
 const QUAYS: Array<LandingStatusCard['assignedQuay']> = [
-  'FLAM_CRUISE_KAI',
+  'FJORDVIK_CRUISE_KAI',
   'AURLAND_KAI',
   'GUDVANGEN_KAI',
   'UNDREDAL_KAI',
@@ -106,11 +106,11 @@ export const FjordLink: React.FC = () => {
                   onClick={() =>
                     updateLandingCard({
                       assignedQuay: q,
-                      quayDisplayName: humanise(q).replace('Flam', 'Flåm'),
+                      quayDisplayName: humanise(q),
                     })
                   }
                 >
-                  {humanise(q).replace('Flam', 'Flåm')}
+                  {humanise(q)}
                 </Button>
               ))}
             </div>

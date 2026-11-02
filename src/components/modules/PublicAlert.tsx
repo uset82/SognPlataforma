@@ -76,10 +76,10 @@ const ACTIONS: ActionDef[] = [
     tone: 'safe',
     icon: <ShieldCheck size={15} strokeWidth={1.8} />,
     copy: {
-      no: { name: 'Trygt område B er åpent', desc: 'Gå til Flåm skule.' },
-      en: { name: 'Safe Zone B is open', desc: 'Proceed to Flåm School.' },
-      es: { name: 'La zona segura B está abierta', desc: 'Diríjase a la escuela de Flåm.' },
-      de: { name: 'Sichere Zone B ist offen', desc: 'Begeben Sie sich zur Flåm-Schule.' },
+      no: { name: 'Trygt område B er åpent', desc: 'Gå til Fjordvik skule.' },
+      en: { name: 'Safe Zone B is open', desc: 'Proceed to Fjordvik School.' },
+      es: { name: 'La zona segura B está abierta', desc: 'Diríjase a la escuela de Fjordvik.' },
+      de: { name: 'Sichere Zone B ist offen', desc: 'Begeben Sie sich zur Fjordvik-Schule.' },
     },
   },
   {
@@ -109,25 +109,25 @@ const ACTIONS: ActionDef[] = [
 const HEADLINE: Record<Lang, { title: string; sub: string; important: string; note: string }> = {
   no: {
     title: 'Nødvarsel',
-    sub: 'Mulig fartøykollisjon nær Flåm havn',
+    sub: 'Brann i motorsalen på skip ved Fjordvik kai',
     important: 'Viktig',
     note: 'Følg instruksjoner fra myndighetene. Oppdateringer sendes etter hvert som situasjonen utvikler seg.',
   },
   en: {
     title: 'Emergency alert',
-    sub: 'Possible vessel collision near Flåm harbour',
+    sub: 'Engine-room fire aboard vessel near Fjordvik quay',
     important: 'Important',
     note: 'Follow instructions from the authorities. Updates will be sent as the situation develops.',
   },
   es: {
     title: 'Alerta de emergencia',
-    sub: 'Posible colisión de buque cerca del puerto de Flåm',
+    sub: 'Incendio en sala de máquinas del buque cerca del muelle de Fjordvik',
     important: 'Importante',
     note: 'Siga las instrucciones de las autoridades. Se enviarán actualizaciones según evolucione la situación.',
   },
   de: {
     title: 'Notfallwarnung',
-    sub: 'Mögliche Schiffskollision nahe dem Hafen von Flåm',
+    sub: 'Maschinenraumbrand an Bord eines Schiffes nahe dem Kai von Fjordvik',
     important: 'Wichtig',
     note: 'Befolgen Sie die Anweisungen der Behörden. Updates folgen, sobald sich die Lage entwickelt.',
   },
@@ -184,12 +184,12 @@ export const PublicAlert: React.FC = () => {
               <span className={s.stepNum}>1</span> Select alert template
             </span>
             <select className={s.select} defaultValue="collision">
-              <option value="collision">Possible vessel collision — evacuate zone</option>
+              <option value="collision">Engine-room fire — evacuate zone</option>
               <option value="landslide">Landslide warning — shelter in place</option>
               <option value="flood">Flood warning — move to high ground</option>
             </select>
             <p className={s.hint}>
-              Use this template when a vessel is at risk of collision and citizens in a specific zone
+              Use this template when a vessel fire threatens a quay area and citizens in a specific zone
               need to evacuate to a safe area.
             </p>
           </div>
@@ -223,7 +223,7 @@ export const PublicAlert: React.FC = () => {
               <span className={s.stepNum}>3</span> Target area
             </span>
             <select className={s.select} defaultValue="zoneA">
-              <option value="zoneA">Zone A — Flåm harbour area</option>
+              <option value="zoneA">Zone A — Fjordvik harbour area</option>
               <option value="zoneB">Zone B — warning perimeter</option>
               <option value="all">Both zones</option>
             </select>

@@ -1,7 +1,7 @@
 # SOGN SAFE — Emergency Coordination Platform (`plataforma`)
 
 > **HVL Master INN524 — Innovation, Technology & Crisis Management (Autumn 2026)**  
-> **Topic**: Autonomous Multi-Agent Systems for Maritime Preparedness & Evacuation in Indre Sogn / Flåm.  
+> **Topic**: Autonomous Multi-Agent Systems for Maritime Preparedness & Evacuation in Indre Sogn / Fjordvik.  
 > **Statutory Boundary**: Academic drill prototype. Sits *beside* statutory systems (VHF Ch. 16, Nodnett, Kystradio, and CIM). Does not claim classified dispatch authority.
 
 ---
@@ -10,7 +10,7 @@
 
 SOGN SAFE is a multi-agent emergency coordination and situational awareness platform engineered for narrow fjord communities facing sudden mass-casualty maritime threats. 
 
-The primary scenario (**Scenario F-03**) models a severe rudder and propulsion casualty aboard a large cruise vessel (*M/S Viking Glory*, 2,420 souls onboard) drifting uncommanded 1.9 nautical miles north of Flåm harbor at 7.2 knots, projecting impact in **T-15:00 minutes** with ~2,843 residents and tourists in the waterfront danger zone.
+The primary scenario (**Scenario F-03**) models a severe engine-room fire aboard a large cruise vessel (*MS Nordic Horizon*, 4,300 souls onboard) with smoke on two decks, making for Fjordvik quay under escort at 5.2 knots, projecting emergency landing in **T-15:00 minutes** with ~2,843 residents and tourists in the waterfront danger zone.
 
 ```
 +-----------------------------------------------------------------------------------------+
@@ -108,7 +108,7 @@ Four basemaps, switched by toggling layer visibility so incident geometry is nev
 > partners — which is why the aerial layer comes from Esri rather than Kartverket.
 
 Hazard polygons, the evacuation route, distress points and the projected drift cone are all
-generated from the real Flåm coordinates already held in `src/data/initialIncident.ts` via the
+generated from the real Fjordvik coordinates already held in `src/data/initialIncident.ts` via the
 adapters in `src/lib/geo.ts`. There is no hand-positioned map geometry anywhere in the product.
 
 ### Styling
@@ -123,23 +123,23 @@ The platform orchestrates 16 specialized agents structured in 5 functional group
 
 | Functional Group | Agent Name | Core Role & Telemetry Handled |
 | :--- | :--- | :--- |
-| **Input / Sensing** | **Ship Agent** | Ingests AIS telemetry, rudder status, bearing (194°), drift speed (7.2 kts). |
+| **Input / Sensing** | **Ship Agent** | Ingests AIS telemetry, engine-room fire status, bearing (194°), speed (5.2 kts). |
 | **Orchestration** | **Main Agent** | Activates Playbook F-03, coordinates agency boundaries, synchronizes clocks. |
 | **Orchestration** | **Risk Agent** | Calculates impact cone, models Zone A (Waterfront) and Zone B (Warning Area). |
 | **Response** | **Response Agent** | Broadcasts alerts to municipal first responders. |
 | **Response** | **Hospital Agent** | Clears 45 triage beds at Førde / Lærdal, prepares trauma bays. |
 | **Response** | **Police Agent** | Enforces waterfront exclusion zone and traffic rerouting around Fretheim. |
-| **Response** | **Fire Agent** | Deploys Aurland & Sogndal crews for shoreside barrier containment. |
+| **Response** | **Fire Agent** | Deploys Aurland & Sogndal crews for fire suppression, boundary cooling, and rescue. |
 | **Response** | **Coast Guard (RS)** | Tasks rescue vessels *RS Halfdan Grieg* and tugs from Gudvangen. |
 | **Response** | **Harbour Agent** | Clears Berth 1-3, clears pleasure craft, prepares emergency mooring. |
 | **Response** | **Municipal Lead** | Convenes Aurland crisis council (*Kriseledelse*), oversees safe havens. |
-| **Response** | **Transport Agent** | Dispatches electric buses for evacuation to Flåm Skule & Samfunnshus. |
+| **Response** | **Transport Agent** | Dispatches electric buses for evacuation to Fjordvik Skule & Samfunnshus. |
 | **Public & Civilian** | **Public Alert Agent** | Prepares multilingual warnings for mobile push broadcast. |
 | **Public & Civilian** | **Citizen Agent** | Aggregates civilian GPS coordinates, maps distress triage, logs safe check-ins. |
 | **Public & Civilian** | **Media / Rumour** | Counters misinformation, updates press dashboard, monitors social feeds. |
 | **Support** | **Power / Infra Agent** | Monitors substation power grid and backup diesel generators. |
 | **Support** | **Telecom Agent** | Manages cellular BTS capacity and satellite backhaul failover. |
-| **Support** | **Logistics Agent** | Distributes blankets, water, and warm shelter supplies at Flåm School. |
+| **Support** | **Logistics Agent** | Distributes blankets, water, and warm shelter supplies at Fjordvik School. |
 
 ---
 
@@ -161,7 +161,7 @@ node ..\app\simulator\server.js
 3. The scenario advances through the 16 stages (T-15 down to T-0).
 4. At **T-7**, click **"AUTHORIZE EMERGENCY BROADCAST"** to transmit push alerts to registered mobile test devices.
 5. In **Civilian Distress Triage**, view incoming signals and click **"SEND ACKNOWLEDGMENT TO DEVICE"** to update civilian status.
-6. In **Tactical Fjord GIS**, watch the vessel drift cone close on Flåm Kai, while the evacuation route dynamically diverts civilians around Fretheim when the waterfront is cordoned off at **T-3**.
+6. In **Tactical Fjord GIS**, watch the vessel approach Fjordvik Kai, while the evacuation route dynamically diverts civilians around Fretheim when the waterfront is cordoned off at **T-3**.
 7. In **FjordLink Card**, inspect the 3-fact vessel disembarkation tally and assign emergency berths.
 8. In **Academic Presentation Mode**, press arrow keys to navigate the INN524 research slides.
 

@@ -72,7 +72,7 @@ export interface Incident {
   code: string;
   title: string;
   shortDescription: string;
-  type: 'VESSEL_COLLISION' | 'LANDSLIDE' | 'FLOOD' | 'HARBOR_INCIDENT' | 'DRILL';
+  type: 'VESSEL_COLLISION' | 'VESSEL_FIRE' | 'LANDSLIDE' | 'FLOOD' | 'HARBOR_INCIDENT' | 'DRILL';
   severity: IncidentSeverity;
   status: IncidentStatus;
   locationName: string;

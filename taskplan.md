@@ -70,16 +70,16 @@ Rules:
 # PHASE 3 - Incident Command Center & Main Dashboard
 
 - [x] Implement central incident banner displaying:
-  - [x] Incident code (e.g. `INC-2026-F03: FLÅM VESSEL CRITICAL DRIFT`).
+  - [x] Incident code (e.g. `INC-2026-F03: VESSEL FIRE · FJORDVIK QUAY`).
   - [x] Dynamic T-minus pre-impact countdown clock (T-15:00 down to T-00:00).
-  - [x] Vessel status banner (`Viking Glory` - Steering uncommanded, 1.9 nm off Flåm kai).
+  - [x] Vessel status banner (`MS Nordic Horizon` - Engine-room fire, smoke on two decks, 1.9 nm off Fjordvik kai).
   - [x] Incident state indicator (`STANDBY` -> `ACTIVE DRIFT` -> `EVACUATION ORDERED` -> `IMPACT / CONTROL` -> `STAND-DOWN`).
 - [x] Implement Key Metric KPIs:
   - [x] Estimated people in danger zone (~2,843 simulated civilians).
   - [x] Civilian apps connected / notified count.
   - [x] Active triage requests (Injured / Trapped / Assisting).
   - [x] Verified safe civilians counter ("I Am Safe" reports).
-  - [x] Evacuation route throughput & safe destination reception capacity (Flåm School: 850 capacity).
+  - [x] Evacuation route throughput & safe destination reception capacity (Fjordvik School: 850 capacity).
 - [x] Implement quick playbook action bar (Authorize Evacuation, Broadcast Alert, Update Safe Zone, Close Waterfront, Stand Down).
 
 ### Acceptance criteria
@@ -89,13 +89,13 @@ Rules:
 
 # PHASE 4 - Tactical GIS & Fjord Map View
 
-- [x] Integrate interactive map canvas centered on Flåm and Aurlandsfjorden.
+- [x] Integrate interactive map canvas centered on Fjordvik and Aurlandsfjorden.
 - [x] Render base topographical fjord terrain with subdued tactical styling.
 - [x] Render vessel icon with live coordinates, heading vector, and estimated drift cone.
 - [x] Overlay pre-approved geographic zones:
   - [x] Zone A (Red - Primary Impact & Waterfront Danger Zone).
   - [x] Zone B (Amber - Secondary Blast/Debris & Evacuation Warning Area).
-  - [x] Safe Zone (Green - Flåm School Reception Center).
+  - [x] Safe Zone (Green - Fjordvik School Reception Center).
   - [x] Closed corridors (Waterfront promenade, harbor access road).
   - [x] Active evacuation guidance route paths.
 - [x] Render civilian help request clusters with triage severity color pins.
@@ -128,8 +128,8 @@ Rules:
 
 # PHASE 6 - 15-Minute Scenario Engine (Playbook F-03)
 
-- [x] Implement scenario timeline state machine (T-15 to T-0) loaded with the Flåm Vessel Collision Playbook:
-  - [x] **T-15**: Bridge reports loss of control 1.9 nm from Flåm.
+- [x] Implement scenario timeline state machine (T-15 to T-0) loaded with the Fjordvik Vessel Fire & Landing Playbook:
+  - [x] **T-15**: Bridge reports engine-room fire 1.9 nm from Fjordvik.
   - [x] **T-14**: Ship Agent generates structured incident telemetry.
   - [x] **T-13**: Main Agent activates Playbook F-03.
   - [x] **T-12**: Risk Agent projects impact cone and loads Zone A/B (~2,843 people at risk).
@@ -138,13 +138,13 @@ Rules:
   - [x] **T-9**: Public Agent formats civilian warning from pre-approved template.
   - [x] **T-8**: Citizen Agents resolve location coordinates against Zone A perimeter.
   - [x] **T-7**: Civilian alert broadcast triggered to mobile apps.
-  - [x] **T-6**: Safe evacuation route to Flåm School calculated and transmitted.
+  - [x] **T-6**: Safe evacuation route to Fjordvik School calculated and transmitted.
   - [x] **T-5**: Incoming civilian help requests arrive (injuries, mobility issues).
   - [x] **T-4**: Medical Agent triages requests; ambulance routes generated.
   - [x] **T-3**: Waterfront blocked; dynamic detour broadcast to civilians.
   - [x] **T-2**: Secondary reception area opened at Fretheim.
   - [x] **T-1**: Pre-impact countdown confirmation; safe muster count verified.
-  - [x] **T-0**: Vessel ground/arrested or impact mitigated; transition to recovery.
+  - [x] **T-0**: Vessel alongside Fjordvik quay; emergency landing; transition to recovery.
 - [x] Add scenario playback controls: Play, Pause, Step Forward, Step Back, Fast Forward (2x, 5x), Reset.
 - [x] Connect scenario steps to live state changes across the dashboard, map, and agent network.
 
@@ -164,7 +164,7 @@ Rules:
 - [x] Implement one-click "Acknowledge Help Request" action:
   - [x] Emits status update back to the specific civilian's mobile device ("Responder team notified").
 - [x] Implement filter controls: View All, Unacknowledged Only, Injured Only, Trapped Only.
-- [x] Implement "I Am Safe" headcount ledger showing muster station arrivals at Flåm School and Fretheim.
+- [x] Implement "I Am Safe" headcount ledger showing muster station arrivals at Fjordvik School and Fretheim.
 
 ### Acceptance criteria
 - [x] Responders can monitor, triage, prioritize, and acknowledge civilian distress calls with real-time feedback.
@@ -176,7 +176,7 @@ Rules:
 - [x] Implement the civilian-to-municipality **FjordLink 3-Fact Status Card**:
   1. Estimated passenger count on board / evacuating.
   2. Rough medical condition triage summary (Minor, Moderate, Severe, Uninjured).
-  3. Designated emergency landing quay/kai (e.g. Flåm Cruise Kai, Aurland Kai, Gudvangen).
+  3. Designated emergency landing quay/kai (e.g. Fjordvik Cruise Kai, Aurland Kai, Gudvangen).
 - [x] Build status card editor & transmitter for vessel liaison / port officer.
 - [x] Build municipal reception board view displaying landing queue and berth assignments.
 - [x] Ensure strict adherence to project boundary: sits beside VHF/Nodnett, does not claim access to closed CIM or classified maritime networks.
@@ -247,7 +247,7 @@ Rules:
 
 - [x] Prototype images referenced nowhere in `src/` (only the crest was used).
 - [x] Fjord map was a hand-drawn SVG on a black rect, positioned by hardcoded pixel arithmetic,
-      while real Flam coordinates already existed unused in `src/data/initialIncident.ts`.
+      while real Fjordvik coordinates already existed unused in `src/data/initialIncident.ts`.
 - [x] `CivicCard variant="glass"` applied to flat page panels - glass became texture, not hierarchy.
 - [x] Decorative 32px grid + radial wash painted behind the whole app, competing with the data.
 - [x] All styling was inline `style={{}}` objects: no hover, focus, or media queries anywhere.
@@ -304,10 +304,10 @@ Rules:
 - [x] Browser QA at 1680/1280/1200/1024/820 px - no horizontal overflow at any width; rail
       collapses to icons below 1280; dashboard, risk map and medical stack below 1180.
 - [x] Cartography confirmed painting: Esri aerial and Kartverket topo tiles both render over
-      Flam, with zone polygons, safe-zone pin, distress pins and the vessel callout in place.
+      Fjordvik, with zone polygons, safe-zone pin, distress pins and the vessel callout in place.
 - [x] Fixed during QA: paired label/value spans were rendering inline and running together
       ("Evacuate Zone ALeave the area immediately") - now block-level across all modules.
-- [x] Fixed during QA: Zone A / Zone B chips and the FLAM place label overlapped; chips are now
+- [x] Fixed during QA: Zone A / Zone B chips and the FJORDVIK place label overlapped; chips are now
       offset apart and the place label moved clear.
 - [x] Fixed during QA: the conditions overlay overflowed short map panels; a container query
       stands it down below 430 px of map height.
@@ -334,7 +334,7 @@ Rules:
 - [x] Built Civilian Distress Triage panel with condition filters and one-click responder acknowledgments.
 - [x] Built FjordLink 3-Fact Landing Status Card with dock reception readiness controls.
 - [x] Built Academic Drill Presentation Slide Deck for INN524 course evaluation.
-- [x] Connected real-time bidirectional proxy and polling synchronization between the platform and the simulator API on port 4000 (`/api/state`, `/api/help`, `/api/safe`, `/api/scenario/flam`).
+- [x] Connected real-time bidirectional proxy and polling synchronization between the platform and the simulator API on port 4000 (`/api/state`, `/api/help`, `/api/safe`, `/api/scenario/vessel-emergency`).
 - [x] Launched and verified the complete live operational drill (Scenario F-03) through browser subagent execution with video recording and screenshots.
 - [x] Created comprehensive [`README.md`](file:///c:/Users/carlos/HVL2026/Autumn_2026/INN524/plataforma/README.md) documentation.
 

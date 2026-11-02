@@ -93,12 +93,12 @@ Skills represent executable capabilities that agents invoke to design, build, si
 - **Purpose**: Visualizes the maritime hazard area and civilian evacuation corridor in Aurlandsfjorden.
 - **Inputs**: Vessel telemetry (lat, lng, speed, heading), zone coordinates, civilian GPS pings.
 - **Capabilities**:
-  - Renders base tactical fjord cartography (Flåm harbour, Fretheim, Aurlandsfjorden, surrounding mountains).
+  - Renders base tactical fjord cartography (Fjordvik harbour, Fretheim, Aurlandsfjorden, surrounding mountains).
   - Plots live vessel location, heading vector, and calculated 15-minute drift cone.
   - Overlays hazard zones:
     - **Zone A**: Immediate impact waterfront hazard area (Red fill: `rgba(184, 58, 50, 0.18)`, border: `#B83A32`).
     - **Zone B**: Secondary debris/evacuation warning zone (Amber fill: `rgba(217, 119, 6, 0.14)`, border: `#D97706`).
-    - **Safe Zone**: Flåm School Muster Center (Green fill: `rgba(49, 88, 76, 0.20)`, border: `#31584C`).
+    - **Safe Zone**: Fjordvik School Muster Center (Green fill: `rgba(49, 88, 76, 0.20)`, border: `#31584C`).
   - Renders clustered civilian distress markers color-coded by triage condition.
   - Provides zoom/pan and focus-tracking shortcuts.
 - **Quality Floor**: Renders smoothly with SVG/Canvas without frame drops during active scenario playback.
@@ -112,7 +112,7 @@ Skills represent executable capabilities that agents invoke to design, build, si
 - **Capabilities**:
   - Maintains synchronized scenario clock (T-15:00 to T-00:00).
   - Triggers sequential stage activations:
-    - `T-15`: Loss of steering reported by Ship Agent.
+    - `T-15`: Engine-room fire reported by Ship Agent.
     - `T-13`: Main Agent activates Playbook F-03.
     - `T-12`: Risk Agent draws Zone A/B (~2,843 simulated civilians at risk).
     - `T-7`: Civilian alert broadcast triggered.

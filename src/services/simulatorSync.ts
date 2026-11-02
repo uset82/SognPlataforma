@@ -40,9 +40,9 @@ export async function fetchSimulatorState(): Promise<SimulatorState | null> {
   }
 }
 
-export async function triggerBackendFlamScenario(): Promise<boolean> {
+export async function triggerBackendEmergencyScenario(): Promise<boolean> {
   try {
-    const res = await fetch(apiUrl('/api/scenario/flam'), { method: 'POST' });
+    const res = await fetch(apiUrl('/api/scenario/vessel-emergency'), { method: 'POST' });
     return res.ok;
   } catch (err) {
     return false;

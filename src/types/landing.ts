@@ -2,7 +2,7 @@ export interface LandingStatusCard {
   id: string;
   vesselName: string;
   callSign: string;
-  assignedQuay: 'FLAM_CRUISE_KAI' | 'AURLAND_KAI' | 'GUDVANGEN_KAI' | 'UNDREDAL_KAI';
+  assignedQuay: 'FJORDVIK_CRUISE_KAI' | 'AURLAND_KAI' | 'GUDVANGEN_KAI' | 'UNDREDAL_KAI';
   quayDisplayName: string;
   totalPeopleToLand: number;
   conditionSummary: {

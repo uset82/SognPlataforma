@@ -54,7 +54,7 @@ export const IncidentDashboard: React.FC = () => {
             <Metric
               label="Ship status"
               icon={<Ship size={11} strokeWidth={1.8} />}
-              value={vessel.name.replace('M/S ', '')}
+              value={vessel.name.replace('MS ', '')}
               size="sm"
               sub={`${vessel.vesselType} · ${num(vessel.passengersOnBoard + vessel.crewOnBoard)} souls`}
             />
@@ -68,7 +68,7 @@ export const IncidentDashboard: React.FC = () => {
               tone="critical"
               sub={
                 vessel.steeringStatus === 'TOTAL_LOSS'
-                  ? 'Total loss of steering'
+                  ? 'Engine-room fire · smoke on two decks'
                   : 'Steering degraded'
               }
             />
@@ -76,7 +76,7 @@ export const IncidentDashboard: React.FC = () => {
 
           <div className={s.kpiCell}>
             <Metric
-              label="Time before impact"
+              label="Time to landing"
               icon={<Timer size={11} strokeWidth={1.8} />}
               value={countdown(currentStage.tSeconds)}
               size="lg"

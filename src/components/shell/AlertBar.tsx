@@ -35,7 +35,7 @@ export const AlertBar: React.FC = () => {
 
       <span className={s.alertRight}>
         <span className={s.impactBlock}>
-          <span className={s.impactLabel}>ETA impact</span>
+          <span className={s.impactLabel}>ETA to quay</span>
           <span className={s.impactValue}>{countdown(currentStage.tSeconds)}</span>
         </span>
 

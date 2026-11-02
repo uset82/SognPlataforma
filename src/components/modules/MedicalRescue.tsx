@@ -50,7 +50,7 @@ interface Unit {
 }
 
 const UNITS: Unit[] = [
-  { id: 'Ambulance 4-2-1', kind: 'Ambulance', base: 'Flåm EMS Station', eta: '5 min' },
+  { id: 'Ambulance 4-2-1', kind: 'Ambulance', base: 'Fjordvik EMS Station', eta: '5 min' },
   { id: 'Ambulance 4-2-3', kind: 'Ambulance', base: 'Aurland EMS', eta: '7 min' },
   { id: 'Ambulance 4-1-5', kind: 'Ambulance', base: 'Lærdal EMS', eta: '12 min' },
   { id: 'Rescue Heli LN-OGE', kind: 'Helicopter', base: 'Bergen Air Ambulance', eta: '9 min' },
